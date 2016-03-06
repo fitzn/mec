@@ -17,7 +17,18 @@ The "marker" middle 1 bit simply indicates the end of the number of 0's.
 Wikipedia has a nice page on this called "Elias Gamma Coding" at:
 http://en.wikipedia.org/wiki/Elias_gamma_coding
 
-This version, mec, adds leading 0's AND leading 1's in alternating fashion.
+**Sidenote**
+
+This library, mec, demonstrates a different approach to Elias coding.
+Before going any further, it's worth noting that the whole point of Elias coding
+is to encode unbounded numbers. Being solely a proof-of-concept, this library
+only works for encoded words up to 64-bits, and thus actually enforces an upper bound.
+As a result, this library is likely not useful in any real application.
+
+**This library**
+
+Returning back to the Elias code and this library's modification,
+the mec library adds leading 0's AND leading 1's in alternating fashion.
 This increases the number of permutations available for a given
 encoded bit length, thereby reducing the average bit length per encoded symbol.
 (I think... that is, I don't prove any of this :) ).
@@ -56,7 +67,7 @@ encoded bit length, thereby reducing the average bit length per encoded symbol.
 So, you could use the assignment above (1 code per value), or map the same
 underlying value to two codes such that the only difference is that
 one code uses leading 0's and the other leading 1's (and flip the marker bit).
-This library uses takes the latter approach, encoding values with a "hi" and
+This library takes the latter approach, encoding values with a "hi" and
 "lo" option so that the same integer value has the same encoded bit-length,
 but can be toggled to signal one of two cases: "hi" and "lo".
 
